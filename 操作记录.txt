@@ -112,7 +112,10 @@ SELECT NEXTVAL('get_CaseIdeaTitle_id');--查询指定sequence的下一个值
 
 =====
 
-
+依赖文件生成
+pip freeze > requirements.txt
+依赖文件安装
+pip install -r requirement.txt
 
 ~~~~~~~表结构设计end~~~~~~~~~~~~~~~~
 from django.contrib.auth import get_user_model
