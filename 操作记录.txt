@@ -1,0 +1,144 @@
+https://gitee.com/mirrors/FakeV2EX
+
+django-admin startproject ThinkStore
+python manage.py startapp topic
+# 将topic 添加setting文件
+
+drop database testbbs2;
+create database testbbs2;
+python manage.py makemigrations 
+python manage.py migrate 
+python manage.py runserver 0.0.0.0:8000
+
+
+python manage.py createsuperuser
+python manage.py changepassword username
+
+https://blog.csdn.net/Pointer_v/article/details/53318671 :拿来试试
+https://github.com/slav0nic/djangobb
+
+Download latest source and install app:
+#!sh
+ wget https://bitbucket.org/slav0nic/djangobb/get/stable.tar.gz
+ tar zxvf stable.tar.gz
+ virtualenv .env
+ cd <place_for_virtualenv_dir>
+ source .env/bin/activate
+ # setup.py from djangobb app
+ ./setup.py install
+ # ./setup.py develop will be ok too if you are planning to upgrade djangobb from hg
+
+Download and setup basic project:
+ #!sh
+ wget https://bitbucket.org/slav0nic/djangobb_project/get/tip.tar.gz
+ tar zxvf tip.tar.gz
+ cd slav0nic-djangobb_project-tip/
+ pip install -r requirements.txt
+ cd basic_project/
+ touch local_settings.py
+ # set DATABASE
+ ./manage.py migrate
+ ./manage.py collectstatic
+ ./manage.py runserver
+
+
+objects.get(pk=id) 方法可用 {{ a.name }}
+
+
+https://blog.csdn.net/Pointer_v/article/details/53318671
+
+###################
+python manage.py makemigrations topic
+#新建./templates/topic
+#在项目urls.py添加：from . import views / from django.urls import include, path  / path('', views.home, name='home'),
+#新建urls.py并添加app_name="blog"
+
+~~~~~~~表结构设计begin~~~~~~~~~~~~~~~~
+topiccategory 
+category_type
+(1,"tab",主标签),
+(2,"go"，副标签),
+ 
+
+
+=====
+#创建自增函数 并在casepoint里使用
+DELIMITER $
+CREATE FUNCTION currval  (seq_name VARCHAR(50))
+RETURNS int
+BEGIN
+     DECLARE v_value INTEGER;
+		 SET v_value = 0;
+		 SELECT current_value INTO v_value
+          FROM sequence
+          WHERE name = seq_name;
+					RETURN v_value;
+END
+$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS nextval;
+DELIMITER $
+CREATE FUNCTION nextval (seq_name VARCHAR(50))
+RETURNS int
+BEGIN
+     UPDATE sequence
+          SET current_value = current_value + increment
+          WHERE name = seq_name; RETURN currval(seq_name);
+END
+$
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS setval;
+DELIMITER $
+CREATE FUNCTION setval (seq_name VARCHAR(50), value INTEGER)
+RETURNS int
+BEGIN
+     UPDATE sequence
+          SET current_value = value
+          WHERE name = seq_name;
+					RETURN currval(seq_name);
+END
+$
+DELIMITER ;
+
+
+INSERT INTO sequence VALUES ('get_CaseIdeaTitle_id', 0, 1);--添加一个sequence名称和初始值，以及自增幅度
+SELECT SETVAL('get_CaseIdeaTitle_id', 1);--设置指定sequence的初始值
+SELECT CURRVAL('get_CaseIdeaTitle_id');--查询指定sequence的当前值
+SELECT NEXTVAL('get_CaseIdeaTitle_id');--查询指定sequence的下一个值
+
+
+
+=====
+
+
+
+~~~~~~~表结构设计end~~~~~~~~~~~~~~~~
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+
+~~~~~~~bootstrap 开始~~~~~~~~~~~~~~~~
+1，bootstrap官网下载《Bootstrap 源码》 解压后\bootstrap-3.3.7\dist,改名bootstrap，放到static\目录
+2，setting.py  STATIC_URL = '/static/'  STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),) 
+3, 找到
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    改为
+    <link href="/static/bootstap/css/bootstrap.css" rel="stylesheet">
+
+    找到
+    <link href="blog.css" rel="stylesheet">
+    改为
+    <link href="/static/bootstrap/css/blog.css" rel="stylesheet">
+
+    找到
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    改为 <script src="/static/bootstrap/js/bootstrap.js"></script>
+4,
+
+
+
+
+~~~~~~~bootstrap~~~~~~~~~~~~~~~~
+

@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+
+{% block main %}
+<div class="container">
+    <div class="bg-success">
+        <h3> {{ ct.title }} </h3>
+        <ul>
+            {% for  c  in  cc %}
+             <li> {{ c.Contents }} </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="constyle">
+        <h6>方案列表</h6>
+        <ol>
+         {% for it in cit %}
+           <li>
+               <a  href="{% url 'ideadetil' ctid=ct.id itid=it.id %}">
+                   {{ it.title }}
+               </a>
+           </li>
+         {% endfor %}
+        </ol>
+    </div>
+</div>
+<!-- {{ theme_id }} -->
+{% endblock %}

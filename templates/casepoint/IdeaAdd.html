@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+
+{% block main %}
+
+<div class="container">
+
+  {% if user.is_authenticated %}
+    <div class="text-center">
+        <h3 >{{ casetitle.title }}</h3>
+    </div>
+    <form role="form"  method="post"  action="">
+        {% csrf_token %}
+        <input  type="hidden"  name="Num"  value="{{ ccSet|length }}">
+        <input  type="hidden"  name="CT_id"  value="{{ casetitle.pk }}">
+        <h4>方案名称:<input type="text" name="IdeaTitle" ></h4>
+        <ul>
+            {% for  cc  in  ccSet %}
+                <li>
+                    <p>{{ cc.Contents }}</p>
+                    <input type="hidden"  name="cc_content{{ forloop.counter }}"  value="{{ cc.id }}">
+                    <textarea name="cc_text{{ forloop.counter }}"></textarea>
+                </li>
+            {% endfor %}
+        </ul>
+{#            </div>#}
+        <button class="btn btn-danger"  type="submit"> 提交 </button>
+	    </form>
+    {% else %}
+        您尚未登录，登录之后方可添加~
+
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% load static   %}
+
+{% block main %}
+<div class="container constyle">
+
+         {% if user.is_authenticated %}
+
+        <form role="form"  method="post"  action="caseadd">
+            <div class="form-group">
+                {% csrf_token %}
+                <input id="caseContentNum" type="hidden"  name="caseContentNum"  value="0">
+                {{ forms.as_ul }}
+                <p>添加：<span> <a id="addVote" href="javascript:void(0);">添加</a></span> </p>
+                <p id="caseContent_id"></p>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit">提 交</button>
+        </form>
+    {% else %}
+        您尚未登录，登录之后方可添加~
+    {% endif %}
+
+{# 两个script脚本用处,动态添加输入框   #}
+<script src="{% static  'js/jquery-3.3.1.js' %}"></script>
+<script>
+$(function () {
+    var num = 1;
+    $("#addVote").click(function () {
+        $("#caseContent_id").append("<span>请输入步骤标题：</span><span><input name=\"casecontent"+num+"\"></span><br>");
+        $("#caseContentNum").val(num);
+        num += 1;
+    });
+});
+</script>
+</div>
+{% endblock %}

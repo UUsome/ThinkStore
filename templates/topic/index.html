@@ -1,0 +1,63 @@
+{% extends 'topic/master.html' %}
+{% block main %}
+    <div class="container">
+        <div  >
+            {% for obj in category_obj %}
+                {% if current_tab == obj.code %}
+                  <a class="label label-warning " style="font-size:18px" href="{% url 'index' %}?tab={{ obj.code }}">{{ obj.name }}</a>
+                {% else %}
+                    <a class="label label-primary" style="font-size:20px" href="{% url 'index' %}?tab={{ obj.code }}">{{ obj.name }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {% if not category_obj.hot %}
+            <div class="cell" >
+                {% for obj in category_children_obj %}
+                    <a  class="label bg-danger" href="#" >{{ obj.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% for obj in topic_obj %}
+            <div class="cell item">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tbody>
+                    <tr>
+                        <td width="48" valign="top" align="center">
+                            <a href="#">
+                                <img src="#" class="rounded" alt="{{ obj.author.username }}"
+                                     width="48px" height="48px" border="0" align="default">
+                            </a>
+                        </td>
+                        <td width="10"></td>
+                        <td width="auto" valign="middle">
+                            <span class="item_title"><a href="{% url 'topic' obj.topic_sn %}">{{ obj.title|safe }}</a></span>
+                            <div class="sep5"></div>
+                            <span class="small">
+                            <div class="votes"></div>
+                            <a  href="#">{{ obj.category.name }}</a> &nbsp;•&nbsp;
+                            <strong>
+                                <a href="#">{{ obj.author.username }}</a>
+                            </strong>
+                            {% if obj.last_comment_user %}
+                                &nbsp;•&nbsp; {{ obj.last_comment_time }} &nbsp;•&nbsp; 最后回复来自
+                                <strong>
+                                    <a href="#">{{ obj.last_comment_user }}</a>
+                                </strong>
+                            {% endif %}
+                        </span>
+                        </td>
+                        <td width="70" align="right" valign="middle">
+                            <a href="#"
+                               class="read_status badge badge-pill badge-secondary">&nbsp;{{ obj.comment_num }}&nbsp;</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+        <div class="inner">
+            <span class="chevron">→</span> <a href="{% url 'new' %}">创建主题</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{# 页面内容 #}
+
+
+{% block main %}
+<div class="container constyle">
+{# <div class="text-danger">   <h3> {{ themes.title }}</h3> </div>#}
+
+<div >
+  <ol>
+  <h3 class="text-center text-info"><small>{{ discrib }}</small></h3>
+    {% for q in question %}
+     <div class="p-2 bg-secondary text-white"> {{ q.questionTitle }} </div>
+        <div class="p-3 mb-2 bg-warning text-dark">
+        {% for c in content %}
+            {% if c.question_id == q.id  %}
+               <p class="text-muted"  style="font-size:20px"> {{ c.questionContent }}</p>
+            {% endif %}
+        {% endfor %}
+        </div>
+     {% endfor %}
+  </ol>
+</div>
+</div>
+{% endblock %}
