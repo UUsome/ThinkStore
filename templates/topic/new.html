@@ -1,10 +1,6 @@
 {% extends 'layout.html' %}
-
 {% block main %}
-
 <div class="container">
-
-
 
     {% if topic_node_code %}
         <div class="header"><a href="{% url 'index' %}">ThinkStore</a> <span class="chevron">&nbsp;›&nbsp;</span> <a href="{% url 'node' node_obj.code %}">{{ node_obj.name }}</a> <span class="chevron">&nbsp;›&nbsp;</span> 创建新主题</div>
@@ -12,42 +8,37 @@
         <div class="cell"><a href="{% url 'index' %}">ThinkStore</a> <span class="chevron">&nbsp;›&nbsp;</span> 创作新主题</div>
     {% endif %}
 
-
-
-
     <form method="POST" action="{% url 'new' %}" id="compose">
         {% csrf_token %}
 
             <!-- 发布类型 -->
-            <div>1,请选择发布类型：</div>
+            <div><h4>请选择发布类型：</h4></div>
                 {% if topic_node_code %}
                     <input type="hidden" name="topic_node" value="{{ node_obj.id }}">
                 {% else %}
                     <div class="cell">
                         <div class="input-group node">
-                          <select class="custom-select" name="topic_node">
-                              {% for item in node_obj %}
-                                <option value="{{ item.id }}" selected> {{ item.name }}<!-- /{{ item.code }}--></option>
-                              {% endfor %}
-                          </select>
+                            <select class="custom-select" name="topic_node">
+                            {% for item in node_obj %}
+                                <option value="{{ item.id }}" selected> {{ item.name }}<!-- /{{ item.code }}--> </option>
+                            {% endfor %}
+                            </select>
                         </div>
                     </div>
                 {% endif %}
 
-<!-- https://code.z01.com/v4/components/input-group.html 参考输入框 -->
         <div class="input-group mb-30" >
-            <div class="input-group-prepend"> <span class="input-group-text" id="basic-addon1">标题</span>  </div>
+            <div class="input-group-prepend"> <span class="input-group-text" id="basic-addon1"><h4>标题</h4></span>  </div>
             <input type="text" class="form-control" rows="1" maxlength="120" id="topic_title" name="title" placeholder="请输入主题标题">
         </div>
 
 
-        <div class="cell">
-            3,正文
-        </div>
-        <div class="">
-            <textarea class="msl"  id="editor" name="content" onkeydown="tab(this)"></textarea>
-        </div>
-
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"><h4>正文</h4></span>
+  </div>
+  <textarea class="form-control" cols="90" rows="16" id="editor" name="content" onkeydown="tab(this)"></textarea>
+</div>
 
         <div class="cell">
             <div class="fr">
@@ -55,11 +46,13 @@
                     <li class="fa fa-paper-plane"></li> &nbsp;发布
                 </button>
             </div>
-            <button type="button" class="btn btn-sm btn-secondary" onclick="previewTopic();"><li class="fa fa-eye"></li> &nbsp;预览</button>
+            <div>  &nbsp;     </div>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="previewTopic();">
+                <li class="fa fa-eye"></li> &nbsp;预览
+            </button>
         </div>
     </form>
     <div class="inner" id="topic_preview"><div class="topic_content"><div class="markdown_body"></div></div></div>
-
 
     {% if has_error %}
         <div class="problem ">提示：
@@ -76,26 +69,17 @@
             </ul>
         </div>
     {% endif %}
-
-
 </div> <!-- /container -->
-
-
-
-
 {% endblock %}
-
-
 
 
 {% block rightbar %}
 <div class="box">
-   提示：1,支持markdown语法
-        2,如果标题能够表达完整内容，则正文可以为空
+   <strong>提示：</strong>
+   <br>1,支持markdown语法 
+   <br>2,如果标题能够表达完整内容，则正文可以为空
 </div>
 {% endblock %}
-
-
 
 
 {% block JS %}

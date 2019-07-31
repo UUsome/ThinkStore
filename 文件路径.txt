@@ -16,7 +16,16 @@ path('', include('casepoint.urls')),
 
 
 2> HTML引用路径：
+layout 整体布局
+layout -> topic/master.html 
 layout -> topic/master.html -->topic/index.html
+layout -> topic/master.html -->topic/topic.html
+layout -> user/master.html 用户右边栏信息
+layout -> user/master.html -> user/member.html 用户主信息
+
+layout -> user/settings.html      未完成但不是急需    -- url却在operation
+SettingView
+
 
 
 整理进度：
@@ -24,8 +33,12 @@ layout -> topic/master.html -->topic/index.html
 ---|---|---
 layout |全局框架配置|OK
 topic/master.html| 配置右边盒子 |OK
-topic/index.html | 配置主main边盒子|OK 分类选项上可以优化
-topic/new.html  正在配置
+topic/index.html | 配置主main边盒子|OK 二层类型点击需要优化暂时无反应
+topic/new.html | 新增博文优化 | OK 
+topic/topic.html| 文章详情 |OK
+user/master.html用户右边栏信息 |OK
+user/member.html|用户主信息|OK
+user/settings.html|用户信息设置 | 未完成，不急需
 
 
 

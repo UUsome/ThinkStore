@@ -18,6 +18,7 @@
     {% if not category_obj.hot %}  <!-- 打印子选项 -->
         <div class="cell panel" >
             {% for obj in category_children_obj %}
+                <!-- 二层类型点击需要优化 -->
                 <a  class="label bg-danger panel-title" href="#" >{{ obj.name }}</a>
             {% endfor %}
         </div>
