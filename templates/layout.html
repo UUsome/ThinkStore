@@ -16,61 +16,60 @@
 
 <!-- 头部导航 -->
 
+
 <!-- 头部导航 -->
 <div class="container">
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">ThinkStore</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="{% url 'index' %}">首页</a></li>
-                <li class="active"><a href="{% url 'caselist' %}">方案</a></li>
-            </ul>
-         {% if request.session.user_info %}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'member' request.session.user_info.username %}">{{ request.session.user_info.username }}</a></li>
-{#              <li><a href="/notes">记事本</a></li>#}
-              <li><a href="/settings">设置</a></li>
-              <li><a href="#" onclick="if (confirm('确定要从 ThinkStore 登出？')) { location.href= '{% url 'signout' %}'; }" class="top">登出</a></li>
-            </ul>
-         {% else %}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'signup' %}">注册</a></li>
-              <li><a href="{% url 'signin' %}">登录</a></li>
-            </ul>
-         {% endif %}
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-    </nav>
-</div> <!-- /container -->
+  <nav class="navbar navbar-default">
+    <a class="navbar-brand" href="">ThinkStore</a>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{% url 'index' %}">首页</a></li>
+        <li class="active"><a href="{% url 'caselist' %}">方案</a></li>
+      </ul>
+    {% if request.session.user_info %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'member' request.session.user_info.username %}">{{ request.session.user_info.username }}</a></li>
+        <li><a href="/settings">设置</a></li>
+        <li><a href="#" onclick="if (confirm('确定要从 ThinkStore 登出？')) { location.href= '{% url 'signout' %}'; }" class="top">登出</a></li>
+      </ul>
+    {% else %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'signup' %}">注册</a></li>
+        <li><a href="{% url 'signin' %}">登录</a></li>
+      </ul>
+    {% endif %}
+  </nav>
+</div> <!-- /头部导航 -->
+
 
 <!-- 主题显示 -->
 <div class="container">
-<div class="row">
-    <div class="col-md-9  sidebar-offcanvas">
-       {% block main %}{% endblock %}
+  <div class="row">
+    <div class="col-md-9  sidebar-offcanvas bg-warning text-dark">  <!--bg-light text-dark 看边界 -->
+      {% block main %} {% endblock %}
     </div>
-    <div class="col-md-3 sidebar-offcanvas">
-        {% block rightbar %} {% endblock %}
+    <div class="col-md-3 sidebar-offcanvas  bg-danger text-white"> <!--bg-light text-dark 看边界 -->
+      {% block rightbar %} {% endblock %}
     </div>
-</div>
-</div>
-{#    定义底部栏 #}
-<hr>
+
+    <div class="col-md-3 sidebar-offcanvas  bg-primary text-white"> <!--bg-light text-dark 看边界 -->
+      {% block leftbar %} {% endblock %}
+    </div>
+
+
+  </div> <!-- /row -->
+</div> <!-- /container -->
+
+
+<!-- 主题显示 -->
+<div>
+
+<hr> <!-- 换行 -->
+
 <footer>
     <p>&copy; 2019 古风.</p>
 </footer>
 
-</div>
+
 
 
 <script src="/static/js/jquery-3.3.1.js"></script>
@@ -93,7 +92,7 @@
         if (document.hidden) {
             $('title').text('ThinkStore');
         } else {
-            $('title').text('欢迎回来ヽ(✿ﾟ▽ﾟ)ノ');
+            $('title').text('欢迎回来ThinkStore');
             setTimeout("$('title').text('ThinkStore');", 3000);
         }
     }, false);

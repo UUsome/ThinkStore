@@ -1,0 +1,31 @@
+文件路径：
+1> url引用路径：
+
+ThinkStore/ThinkStore/url.py
+
+path('admin/', admin.site.urls),
+path('', include('topic.urls')),
+path('', include('user.urls')),
+path('', include('operation.urls')),
+path('', include('casepoint.urls')),
+
+
+
+
+
+
+
+2> HTML引用路径：
+layout -> topic/master.html -->topic/index.html
+
+
+整理进度：
+文本名字|用途解释|配置进度
+---|---|---
+layout |全局框架配置|OK
+topic/master.html| 配置右边盒子 |OK
+topic/index.html | 配置主main边盒子|OK 分类选项上可以优化
+topic/new.html  正在配置
+
+
+
