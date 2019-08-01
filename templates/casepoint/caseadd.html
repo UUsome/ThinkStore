@@ -1,14 +1,16 @@
-{% extends 'layout.html' %}
-{% load static   %}
+{% extends 'casepoint/master.html' %}
+
+{% load static %} 
 
 {% block main %}
+
 <div class="container constyle">
 
-         {% if user.is_authenticated %}
-
+{% if request.session.user_info %}
+{# {% if user.is_authenticated %}   不能用，不知道为啥 而且用html注释不行>#}
         <form role="form"  method="post"  action="caseadd">
+        {% csrf_token %}
             <div class="form-group">
-                {% csrf_token %}
                 <input id="caseContentNum" type="hidden"  name="caseContentNum"  value="0">
                 {{ forms.as_ul }}
                 <p>添加：<span> <a id="addVote" href="javascript:void(0);">添加</a></span> </p>
@@ -17,11 +19,11 @@
             <br>
             <button class="btn btn-primary" type="submit">提 交</button>
         </form>
-    {% else %}
-        您尚未登录，登录之后方可添加~
-    {% endif %}
+{% else %}
+   <span> 您尚未登录，登录之后方可添加~ </span>
+{% endif %}
 
-{# 两个script脚本用处,动态添加输入框   #}
+<!-- 两个script脚本用处,动态添加输入框    -->
 <script src="{% static  'js/jquery-3.3.1.js' %}"></script>
 <script>
 $(function () {
@@ -33,5 +35,9 @@ $(function () {
     });
 });
 </script>
+
 </div>
 {% endblock %}
+
+
+

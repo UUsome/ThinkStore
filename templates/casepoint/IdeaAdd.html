@@ -1,34 +1,58 @@
-{% extends 'layout.html' %}
-
+{% extends 'casepoint/master.html' %}
 
 {% block main %}
 
 <div class="container">
+{% if request.session.user_info %}
 
-  {% if user.is_authenticated %}
-    <div class="text-center">
-        <h3 >{{ casetitle.title }}</h3>
-    </div>
-    <form role="form"  method="post"  action="">
-        {% csrf_token %}
-        <input  type="hidden"  name="Num"  value="{{ ccSet|length }}">
-        <input  type="hidden"  name="CT_id"  value="{{ casetitle.pk }}">
-        <h4>方案名称:<input type="text" name="IdeaTitle" ></h4>
-        <ul>
+<div class=""> <h3 >{{ casetitle.title }}</h3> </div>
+
+<form class="form-inline" role="form"  method="post"  action="">
+{% csrf_token %}   
+    <div class="form-group">
+        <label class="sr-only" for="testonly">{{ casetitle.title }}</label>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <input  type="hidden"  name="Num"  value="{{ ccSet|length }}">
+                <input  type="hidden"  name="CT_id"  value="{{ casetitle.pk }}">
+                <input type="text" class="form-control" name="IdeaTitle" placeholder="方案名称" required="required">
+            </div>
+        </div>
+        <div class="card" style="width: 70%">
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="20%" scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
             {% for  cc  in  ccSet %}
-                <li>
-                    <p>{{ cc.Contents }}</p>
+            <tbody>
+            <tr>
+                <th width="20%" scope="row">{{ cc.Contents }}:</th>
+                <td>
                     <input type="hidden"  name="cc_content{{ forloop.counter }}"  value="{{ cc.id }}">
-                    <textarea name="cc_text{{ forloop.counter }}"></textarea>
-                </li>
-            {% endfor %}
-        </ul>
-{#            </div>#}
-        <button class="btn btn-danger"  type="submit"> 提交 </button>
-	    </form>
-    {% else %}
-        您尚未登录，登录之后方可添加~
+                    <textarea name="cc_text{{ forloop.counter }}" rows="3%" cols="80%"></textarea>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+        </div>
+    </div>
+<br>
+    <button type="submit" class="btn btn-primary"> &nbsp; 提交 </button>
+</form>
 
-    {% endif %}
+{% else %}
+    <span>登录之后可使用脚本</span>
+{% endif %}
 </div>
+
+
+
+
+
 {% endblock %}
+
+

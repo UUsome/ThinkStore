@@ -1,29 +1,41 @@
-{% extends 'layout.html' %}
-
-
+{% extends 'casepoint/master.html' %}
 {% block main %}
-<div class="container">
-    <div class="bg-success">
-        <h3> {{ ct.title }} </h3>
-        <ul>
-            {% for  c  in  cc %}
-             <li> {{ c.Contents }} </li>
-            {% endfor %}
-        </ul>
-    </div>
 
-    <div class="constyle">
-        <h6>方案列表</h6>
-        <ol>
-         {% for it in cit %}
-           <li>
-               <a  href="{% url 'ideadetil' ctid=ct.id itid=it.id %}">
-                   {{ it.title }}
-               </a>
-           </li>
-         {% endfor %}
-        </ol>
+<div class="container">
+
+<!-- 面包屑导航 -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'caselist' %}">ThinkStore.方案</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ ct.title }} </li>
+  </ol>
+</nav>
+
+
+
+<div class="card" style="width: 70%">
+    <div class="card-body">
+       <h3 class="card-title">{{ ct.title }}</h3>
     </div>
+    <ul class="list-group list-group-flush">
+        {% for  c  in  cc %}
+         <li class="list-group-item"> {{ c.Contents }} </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    
+    <div class="card-body">
+       <span class="help-block">方案列表</span>
+    </div>
+    <ol class="list-group list-group-flush">
+        {% for it in cit %}
+         <li>
+             <a href="{% url 'ideadetil' ctid=ct.id itid=it.id %}">{{ it.title }}</a>
+         </li>
+        {% endfor %}
+    </ol>
+
 </div>
-<!-- {{ theme_id }} -->
+</div><!-- /container -->
 {% endblock %}

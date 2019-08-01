@@ -1,29 +1,36 @@
-{% extends 'layout.html' %}
-
+{% extends 'casepoint/master.html' %}
 
 {% block main %}
 <div class="container constyle">
-    <h4>所有思考框架</h4>
-    <!-- 打印case  -->
+<h4>脚本列表</h4>
+<!-- 打印case  -->
+{% if request.session.user_info %}
     {% for  i  in  allCaseTitle %}
-        <div class="row">
-            <div class="col alert alert-warning" role="alert">
-                {# <small> {{ i.type }} </small>#}
-                {{ i.title }}
-            </div>
-            <div class="col">
-                <a class="btn btn-primary" href="{% url 'ideaadd' id=i.id %}" role="button">新增方案</a>
-                <a class="btn btn-success" href="{% url 'casediscrib' id=i.id %}" role="button">查看</a>
-            </div>
-        </div>
+        <div class="card">
+          <!-- <h5 class="card-header">{{ i.title }}</h5> -->
+          <div class="card-body">
+            <!-- <h5 class="card-title">留着些提示之类的信息</h5>  
+            <p class="card-text"> </p>-->
+            <a class="" href="{% url 'casediscrib' id=i.id %}" role="button"> <strong> {{ i.title }}</strong> </a>  
+             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="" href="{% url 'ideaadd' id=i.id %}" role="button"><span class="badge badge-pill">使用脚本</span></a>
+          </div>
+        </div>    
     {% endfor %}
-
-    <!-- 优化可放右侧 用户信息相关栏位-->
-    <div class="row">
-        <div class="col">
-            <a class="btn btn-danger btn-lg" href="{% url 'caseadd' %}" role="button">新增方案</a>
-        </div>
-    </div>
+{% else %}
+    {% for  i  in  allCaseTitle %}
+        <div class="card">
+          <!-- <h5 class="card-header">{{ i.title }}</h5> -->
+          <div class="card-body">
+            <!-- <h5 class="card-title">留着些提示之类的信息</h5>  
+            <p class="card-text"> </p>-->
+            <a class="" href="{% url 'casediscrib' id=i.id %}" role="button"> <strong> {{ i.title }}</strong> </a>  
+             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <span> 登录后可使用脚本 </span><hr>
+          </div>
+        </div>  
+    {% endfor %}
+{% endif %}
 
 </div>
 {% endblock %}

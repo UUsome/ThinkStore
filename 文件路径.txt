@@ -22,9 +22,22 @@ layout -> topic/master.html -->topic/index.html
 layout -> topic/master.html -->topic/topic.html
 layout -> user/master.html 用户右边栏信息
 layout -> user/master.html -> user/member.html 用户主信息
-
 layout -> user/settings.html      未完成但不是急需    -- url却在operation
-SettingView
+layout ->casepoint/master.html->casepoint/master.html 右侧信息
+layout ->casepoint/master.html->casepoint/index.html 主信息
+layout ->casepoint/master.html->casepoint/caseadd.html 添加脚本 
+layout ->casepoint/master.html->casepoint/casediscrib.html 
+
+ 
+tar -czvf ThinkStore.bak.tar.gz ThinkStore/
+
+
+
+
+
+
+
+
 
 
 
@@ -39,6 +52,14 @@ topic/topic.html| 文章详情 |OK
 user/master.html用户右边栏信息 |OK
 user/member.html|用户主信息|OK
 user/settings.html|用户信息设置 | 未完成，不急需
+casepoint/master.html | 右边栏信息 |OK
+casepoint/index.html | 主内容 |OK
+casepoint/caseadd.html | 添加脚本页面 | OK
+casepoint/casediscrib.html | 脚本内容页面 | OK
+casepoint/ideadetil.html | 使用脚本内容 | OK
+casepoint/casediscrib.html | 查看脚本内容 | OK
+casepoint/ideaAdd.html | 添加使用脚本 | 需要添加标题限制不能为空
+
 
 
 

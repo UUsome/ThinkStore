@@ -92,8 +92,8 @@ class IdeaAdd(View):
 def ideaDetil(request,ctid,itid):
     casetitle = CaseTitle.objects.get(pk=ctid)
     casecontents = CaseContent.objects.filter(title_id=ctid)
-    caseideatitle = CaseIdeaTitle.objects.get(caseTitle_id=ctid)
-    caseideacontents = CaseIdeaContent.objects.filter(title_id=caseideatitle.id)
+    caseideatitle = CaseIdeaTitle.objects.get(pk=itid)
+    caseideacontents = CaseIdeaContent.objects.filter(title_id=itid)
     context ={}
     context['casetitle'] = casetitle
     context['casecontents'] = casecontents

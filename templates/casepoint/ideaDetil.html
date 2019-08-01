@@ -1,28 +1,57 @@
-{% extends 'layout.html' %}
+{% extends 'casepoint/master.html' %}
 
 {# 页面内容 #}
 
 {% block main %}
 <div class="container">
 
- <div class="bg-danger ">   <h3> {{ casetitle.title }}</h3> </div>
-
-<div >
-  <h3 class="bg-success"><small>{{  caseideatitle.title }}</small></h3>
-
-    <ol>
-
-    {% for cc in casecontents %}
-     <div class="p-2 bg-secondary text-white"> {{ cc.Contents }} </div>
-        <div class="p-3 mb-2 bg-warning text-dark">
-        {% for cic in caseideacontents %}
-            {% if cic.caseContent_id == cc.id  %}
-               <p >方案内容： {{ cic.contents }}</p>
-            {% endif %}
-        {% endfor %}
-        </div>
-     {% endfor %}
+<!-- 面包屑导航 -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'caselist' %}">ThinkStore.方案</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'casediscrib' id=casetitle.id %}">
+      {{ casetitle.title }}
+    </a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ caseideatitle.title }} </li>
   </ol>
+</nav>
+
+<h4><strong>{{ caseideatitle.title }}</strong></h4>
+
+<div class="card" style="width: 70%">
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th width="20%" scope="col">脚本</th>
+        <th scope="col">方案</th>
+    </tr>
+    </thead>
+    {% for cc in casecontents %}
+        <tbody>
+          <tr>
+            <th scope="row">{{ cc.Contents }}</th>
+            <td colspan="2">
+                {% for cic in caseideacontents %}
+                    {% if cic.caseContent_id == cc.id  %}
+                         {{ cic.contents }} 
+                    {% endif %}
+                {% endfor %}
+           </td>
+          </tr>
+        </tbody>
+    {% endfor %}
+</table>
 </div>
+
 </div>
 {% endblock %}
+
+
+
+
+
+ 
+
+
+
+

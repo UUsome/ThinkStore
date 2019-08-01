@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block rightbar %}
+<div class="box">
+    {% if request.session.user_info %}
+        <strong> 这里是思维框架脚本</strong>
+        <hr>
+        <a class="btn btn-danger btn-lg" href="{% url 'caseadd' %}" role="button">新增方案脚本</a>
+    {% else %}
+
+        <strong> 这里是思维框架脚本</strong>
+        <hr>
+        <span>登录可后可自行添加新脚本</span>
+    {% endif %}
+{% endblock %}
