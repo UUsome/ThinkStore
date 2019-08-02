@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'ThinkStore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'thinkstore',
+        'NAME': 'thinkstore_git',
         #'HOST': '127.0.0.1',
        # 'HOST': '192.168.211.134',
         'HOST': '39.96.204.75',
